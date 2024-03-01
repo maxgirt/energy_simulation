@@ -1,0 +1,134 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: black;
+
+  color-scheme: light dark;
+  color: black;
+  background-color: #F4F3F2 ;
+
+
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #aaa; 
+  background-color: #f0f0f0; 
+  border-radius: 15px;
+  text-align: center;
+  margin-left: 0.5rem;
+  outline: none; 
+  transition: border-color 0.3s, box-shadow 0.3s; 
+  color: black;
+}
+
+input:focus {
+  border-color: #29B675; 
+  box-shadow: 0 0 0 2px rgba(41, 182, 117, 0.25); 
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #29B675;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #1d8e4d;
+}
+
+form {
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  width: 100%;
+  padding: 1vh; 
+  border: solid;
+  border-radius: 15px;
+  border-color: grey;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+
+.Container {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: start; 
+  gap: 5vh;
+  width: 25%;
+  margin-left: 5%;
+}
+
+
+.ChargingOutput {
+  width: 100%; 
+  border: solid;
+  border-radius: 15px;
+  border-color: grey;
+  margin-left: 5%;
+  text-align: center;
+}
+
+.Parent {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: start; 
+  gap: 20px; 
+  width: 100%;
+
+}
+
+.ChargingEvents {
+  width: 50%; 
+  padding: 1%;
+  border: solid;
+  border-radius: 15px;
+  border-color: grey;
+  margin-left: 10%;
+  text-align: center;
+
+}
+
+.RightContainer {
+  /* This container will hold ChargingEvents and EnergyUsage */
+  display: flex;
+  flex-direction: column; /* Stacks ChargingEvents and EnergyUsage vertically */
+}
+
+.Instructions {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+p {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  
+}
+
+.BonusButton {
+  border: none;
+  border-radius: 15px;
+  background-color: #29B675;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 0%;
+}
+

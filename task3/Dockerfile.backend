@@ -1,0 +1,50 @@
+    FROM node:20-alpine as builder
+
+    # Set the working directory
+    WORKDIR /usr/src/app
+
+    # Copy package.json and package-lock.json
+    COPY package*.json ./
+
+    # Install Node.js dependencies
+    RUN npm install
+
+    # Copy Prisma schema
+    COPY prisma/schema.prisma ./prisma/
+
+    # Install Prisma CLI
+    RUN npm install prisma --save-dev
+
+    # Generate Prisma client
+    RUN npx prisma generate
+
+    # Copy the rest of the application source code
+    COPY . .
+
+
+    # Compile TypeScript to JavaScript
+    RUN npm run compile
+
+    # Actual production image starts here, using the same Node.js version as the builder
+    FROM node:20-alpine
+
+    # Install Python
+    RUN apk add --no-cache python3 py3-pip
+
+    # Set the working directory for the final image
+    WORKDIR /usr/src/app
+
+    # Copy the package.json and other necessary files from the builder stage
+    COPY --from=builder /usr/src/app/package*.json ./
+    COPY --from=builder /usr/src/app/dist ./dist
+    COPY --from=builder /usr/src/app/node_modules ./node_modules
+    COPY --from=builder /usr/src/app/prisma ./prisma
+
+    # Copy the Python script
+    COPY --from=builder /usr/src/app/simulation.py ./
+
+    # Expose the port your app runs on
+    EXPOSE 4000
+
+    # Command to run your app
+    CMD ["sh", "-c", "npx prisma migrate dev --name init && npx prisma generate && node dist/index.js"]

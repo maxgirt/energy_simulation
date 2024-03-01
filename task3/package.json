@@ -1,0 +1,27 @@
+{
+  "name": "task3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "compile": "npx tsc",
+    "start": "npm run compile && node ./dist/index.js",
+    "build": "NODE_ENV=production npm run compile"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.21",
+    "prisma": "^5.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "@prisma/client": "^5.10.2",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6"
+  }
+}

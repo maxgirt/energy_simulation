@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"] //for use with docker
+}
+
+datasource db {
+  provider = "postgresql"
+   url      = env("DATABASE_URL") 
+}
+
+//contains the data for a single simulation run AKA output
+model SimulationSession {
+  id                      Int                   @id @default(autoincrement())
+  createdAt               DateTime              @default(now())
+  simulationParametersId  Int
+  simulationParameters    SimulationParameters  @relation(fields: [simulationParametersId], references: [id])
+  totalEnergyConsumed       Float
+  theoreticalMaxPowerDemand Float
+  actualMaxPowerDemand      Float
+  concurrencyFactor         Float
+}
+
+//contains the parameters for a single simulation run AKA input
+model SimulationParameters {
+  id                        Int                 @id @default(autoincrement())
+  numberOfChargePoints      Int
+  arrivalProbabilityMultiplier Int              @default(100)
+  consumption               Float               @default(18)
+  chargingPower             Float               @default(11)
+  simulationSessions        SimulationSession[]
+}
+

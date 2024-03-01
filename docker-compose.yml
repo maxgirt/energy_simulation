@@ -1,0 +1,40 @@
+version: '2.1'
+
+services:
+  backend:
+    build:
+      context: ./task3
+      dockerfile: Dockerfile.backend 
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    # command: ["./wait-for-postgres.sh", "db", "--", "npm", "start"]
+
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/dbname
+
+  frontend:
+    build:
+      context: ./task2/frontend
+      dockerfile: Dockerfile.frontend 
+    ports:
+      - "3000:3000"
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d dbname"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres_data:
