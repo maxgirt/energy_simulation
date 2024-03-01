@@ -32,3 +32,6 @@ Uses ports 3000 and 4000
 - React
 - Chart.js
 - Docker
+
+![alt text](<Screenshot 2024-03-01 at 11.40.17 AM.png>)
+![alt text](<Screenshot 2024-03-01 at 11.40.51 AM.png>)
